@@ -1,0 +1,1 @@
+graylog_vm ansible_host=192.168.1.28 ansible_connection=ssh ansible_user=gavin ansible_ssh_pass=test ansible_password=password

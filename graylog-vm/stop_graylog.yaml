@@ -1,0 +1,10 @@
+---
+- hosts: graylog_vm
+  tasks:
+    - name: Clear AppArmor service
+      become: yes
+      command: sudo aa-remove-unknown
+    - name: Stop docker containers
+      shell:
+        cmd: "docker compose down"
+        chdir: /home/gavin/graylog/

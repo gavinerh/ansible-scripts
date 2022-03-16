@@ -1,0 +1,15 @@
+---
+- hosts: graylog_vm
+  tasks:
+  - name: Ping graylog vm
+    ping:
+    # MODIFY FILE TO INCLUDE THE CHANGE FILE OWNERSHIP
+  # - name: Change docker file ownership
+  #   ansible.builtin.file:
+  #     path: /var/run/docker.sock
+  #     owner: gavin
+  #     docker: docker
+  - name: Start graylog server
+    shell:
+    cmd: "docker compose -f docker-compose.yml up -d"
+    chdir: /home/gavin/graylog/

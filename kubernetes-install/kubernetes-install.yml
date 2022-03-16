@@ -1,0 +1,10 @@
+---
+ - hosts: all
+   become: yes
+   tasks:
+   - name: install curl
+     apt: name=curl state=latest
+
+   - name: Install kubenetes
+     snap: name=microk8s classic=yes
+        
