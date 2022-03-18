@@ -1,0 +1,34 @@
+---
+ - hosts: all
+   become: yes
+   tasks:
+   - name: install curl
+     apt: name=curl state=latest
+
+   - name: Install Kubectl
+     snap: name=kubectl classic=yes state=present
+
+   - name: Install microk8s
+     snap: name=microk8s classic=yes state=present
+
+   - name: Add microk8 to group
+     command: usermod -aG microk8s gavin
+     ignore_errors: yes
+
+
+   - name: Create .kube folder
+     shell: mkdir .kube
+     args:
+       chdir: /home/gavin
+     ignore_errors: yes
+
+   - name: Create config file
+     shell: microk8s config > config
+     args:
+       chdir: /home/gavin/.kube
+     ignore_errors: yes
+     
+   - name: Reboot system
+     command: reboot
+     become: yes
+     ignore_errors: yes
